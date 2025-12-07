@@ -16,6 +16,13 @@
   {% endif %}
 
   <div class="page-width gb-mainbar">
+    <button class="gb-menu-toggle" type="button" aria-expanded="false" aria-controls="GbNavBar" aria-label="{{ 'sections.header.menu' | t | default: 'Menu' }}" data-menu-toggle>
+      <svg class="gb-menu-icon" viewBox="0 0 18 16" aria-hidden="true" focusable="false">
+        <path fill="currentColor" d="M1 .5a.5.5 0 1 0 0 1h15.71a.5.5 0 0 0 0-1zM.5 8a.5.5 0 0 1 .5-.5h15.71a.5.5 0 0 1 0 1H1A.5.5 0 0 1 .5 8m0 7a.5.5 0 0 1 .5-.5h15.71a.5.5 0 0 1 0 1H1a.5.5 0 0 1-.5-.5"/>
+      </svg>
+    </button>
+    <span class="gb-mobile-title" aria-hidden="true">PRODUTOS</span>
+
     <a href="{{ routes.root_url }}" class="gb-logo" aria-label="{{ shop.name }}">
       {% if settings.logo != blank %}
         {% liquid
@@ -60,7 +67,7 @@
 
   {% assign primary_links = "Produtos|/pages/produtos,Ferramentas|#,Ferragens|#,Pintura|#,Jardim|#,Promoções|/pages/promocoes" | split: "," %}
   {% assign secondary_links = "Serviços|/pages/servicos,Sobre Nós|/pages/about-us,Blog|/pages/blog,Contactos|/pages/contactos" | split: "," %}
-  <nav class="gb-nav-bar" aria-label="Principal">
+  <nav class="gb-nav-bar" id="GbNavBar" aria-label="Principal" data-nav>
     <div class="gb-nav__menu gb-nav__menu--primary">
       {% for item in primary_links %}
         {% assign parts = item | split: "|" %}
@@ -74,6 +81,37 @@
       {% endfor %}
     </div>
   </nav>
+  <script>
+    (() => {
+      const header = document.currentScript.closest('.gb-header');
+      const toggle = header?.querySelector('[data-menu-toggle]');
+      const nav = header?.querySelector('[data-nav]');
+      if (!header || !toggle || !nav) return;
+
+      const closeMenu = () => {
+        header.classList.remove('menu-open');
+        nav.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      };
+
+      toggle.addEventListener('click', () => {
+        const isOpen = !header.classList.contains('menu-open');
+        header.classList.toggle('menu-open', isOpen);
+        nav.classList.toggle('is-open', isOpen);
+        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+
+      nav.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', closeMenu);
+      });
+
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 900) {
+          closeMenu();
+        }
+      });
+    })();
+  </script>
 </header>
 
 {% schema %}
