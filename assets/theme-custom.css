@@ -127,7 +127,7 @@ a {
   z-index: 50;
   background: var(--gb-white);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
-  padding-bottom: 24px;
+  padding-bottom: 12px;
 }
 
 .gb-topbar {
@@ -162,21 +162,37 @@ a {
   font-size: 20px;
 }
 
-.gb-mainbar {
-  display: grid;
-  grid-template-columns: auto auto auto;
+.gb-menu-toggle {
+  display: none;
   align-items: center;
-  gap: 32px;
-  padding: 12px 0;
-  background: var(--gb-white);
-  justify-content: space-between;
-  position: relative;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  border: 1px solid #dadada;
+  background: #ffffff;
+  cursor: pointer;
+  padding: 10px;
+  transition: background 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.gb-menu-toggle .gb-menu-icon {
+  width: 26px;
+  height: 22px;
+  color: #111111;
+}
+
+.gb-menu-toggle:hover {
+  background: #f9f9f9;
+  border-color: #cfcfcf;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
 }
 
 .gb-logo img {
   max-height: 82px;
-  width: 317px;
-  height: 65px;
+  height: auto;
+  width: auto;
+  max-width: 220px;
   object-fit: contain;
 }
 
@@ -189,10 +205,9 @@ a {
   padding: 12px 16px;
   gap: 10px;
   min-height: 48px;
-  max-height: 48px;
-  width: 523px;
-  max-width: 523px;
-  margin: 0 auto;
+  max-height: 52px;
+  width: 100%;
+  max-width: 540px;
 }
 
 .gb-search input {
@@ -257,35 +272,38 @@ a {
 }
 
 .gb-nav-bar {
-  position: absolute;
-  width: 1366px;
-  height: 59px;
-  left: 0px;
-  top: 183px;
+  position: relative;
+  width: 100%;
   display: grid;
-  grid-template-columns: 70% 30%;
+  grid-template-columns: 2fr 1fr;
   z-index: 45;
+  margin-top: 8px;
+  overflow: visible;
+  background: var(--gb-white);
 }
 
 .gb-nav__menu {
   display: flex;
   align-items: center;
   height: 100%;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
 }
 
 .gb-nav__menu--primary {
   background: #ff6701;
-  padding: 0 247px;
-  gap: 32px;
-  justify-content: flex-start;
+  padding: 12px 18px;
+  gap: 24px;
+  justify-content: center;
+  border-radius: 10px;
 }
 
 .gb-nav__menu--secondary {
   background: transparent;
-  padding: 0px 226px;
-  gap: 28px;
-  justify-content: space-evenly;
+  padding: 12px 18px;
+  gap: 20px;
+  justify-content: flex-end;
+  background: #f5f5f5;
+  border-radius: 10px;
 }
 
 .gb-nav__link {
@@ -306,58 +324,309 @@ a {
   color: #111111;
 }
 
+.gb-nav__item--has-mega {
+  position: relative;
+}
+
+.gb-nav__item--has-mega .gb-nav__link {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.gb-mega {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 14px);
+  width: 100%;
+  display: none;
+  z-index: 60;
+  pointer-events: none;
+}
+
+.gb-mega__inner {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.12);
+  padding: 28px 32px 32px;
+  border: 1px solid #f1f1f1;
+  width: min(1240px, calc(100% - 64px));
+  margin: 0 auto;
+  max-height: 70vh;
+  overflow-y: auto;
+  min-width: 1024px;
+}
+
+.gb-mega__title {
+  font-size: 30px;
+  font-weight: 700;
+  color: #ff6701;
+  margin: 0 0 20px;
+}
+
+.gb-mega__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px 24px;
+}
+
+.gb-mega--tools .gb-mega__grid,
+.gb-mega__columns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px 36px;
+}
+
+.gb-mega__column-title {
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: 0;
+  font-family: "Poppins", "Montserrat", "Inter", system-ui, -apple-system, sans-serif;
+  margin: 0 0 10px;
+}
+
+.gb-mega__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.gb-mega__text--link {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.gb-mega__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #111111;
+  transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+  background: #ffffff;
+}
+
+.gb-mega__item:hover {
+  background: #fff8f2;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.07);
+  transform: translateY(-2px);
+}
+
+.gb-mega__icon img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  filter: invert(46%) sepia(76%) saturate(1658%) hue-rotate(357deg) brightness(103%) contrast(99%);
+}
+
+.gb-mega__text {
+  font-size: 14px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: 0;
+  color: #000000;
+  font-family: "Poppins", "Montserrat", "Inter", system-ui, -apple-system, sans-serif;
+}
+
+.gb-nav__item--has-mega.is-open .gb-mega {
+  display: block;
+  pointer-events: auto;
+}
+
+.gb-mainbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 12px 0;
+  flex-wrap: wrap;
+  background: var(--gb-white);
+  position: relative;
+}
+
+.gb-logo {
+  display: inline-flex;
+  align-items: center;
+}
+
+.gb-mobile-title {
+  display: none;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.gb-search {
+  flex: 1 1 420px;
+}
+
+.gb-icons {
+  justify-content: flex-end;
+}
+
+@media (max-width: 1100px) {
+  .gb-nav-bar {
+    grid-template-columns: 1.4fr 0.6fr;
+  }
+}
+
 @media (max-width: 900px) {
-  .gb-mainbar {
-    grid-template-columns: 1fr;
-    gap: 16px;
-    padding: 20px 0;
+  .gb-header {
+    padding-bottom: 0;
+    background: #ff6701;
+    box-shadow: none;
   }
 
-  .gb-search {
-    width: 100%;
-    max-width: 100%;
+  .gb-topbar {
+    font-size: 16px;
+  }
+
+  .gb-topbar__inner {
+    padding: 12px 0;
+  }
+
+  .gb-topbar__text {
+    font-size: 16px;
+  }
+
+  .gb-mainbar {
+    align-items: center;
+    padding: 16px 0;
+    gap: 16px;
+    color: #ffffff;
+  }
+
+  .gb-menu-toggle {
+    display: inline-flex;
+    order: 1;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    background: #ffffff;
+    box-shadow: none;
+  }
+
+  .gb-menu-toggle .gb-menu-icon {
+    color: #111111;
+  }
+
+  .gb-mobile-title {
+    display: inline-flex;
+    order: 2;
+    color: #ffffff;
+  }
+
+  .gb-logo {
+    display: none;
   }
 
   .gb-icons {
-    justify-content: flex-start;
+    order: 3;
+    gap: 16px;
+  }
+
+  .gb-search {
+    order: 4;
+    width: 100%;
+    max-width: none;
+    background: #ffffff;
+    border: none;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+    padding: 16px 18px;
+    min-height: 60px;
+  }
+
+  .gb-search img {
+    filter: brightness(0) saturate(100%) invert(42%) sepia(96%) saturate(1953%) hue-rotate(355deg) brightness(104%) contrast(105%);
   }
 
   .gb-nav-bar {
     display: none;
-  }
-}
-
-@media (min-width: 1100px) {
-  .gb-mainbar {
-    min-height: 140px;
     grid-template-columns: 1fr;
+    margin-top: 8px;
+    position: static;
+    background: #ff6701;
+    border-top: 1px solid #e5e5e5;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    padding: 16px;
   }
 
-  .gb-logo {
-    position: absolute;
-    left: 98px;
-    top: 20px;
+  .gb-header.menu-open .gb-nav-bar,
+  .gb-nav-bar.is-open {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-bottom: 12px;
   }
 
-  .gb-search {
-    position: absolute;
-    left: 615px;
-    top: 26px;
+  .gb-nav__menu {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
   }
 
-  .gb-icons {
-    position: absolute;
-    right: 98px;
-    top: 26px;
+  .gb-nav__menu--primary {
+    width: 100%;
+    background: #ff6701;
+    border-radius: 8px;
+    padding: 12px 16px 8px;
+    gap: 12px;
   }
 
-  .home-hero {
-    position: absolute;
-    left: -10px;
-    top: 0;
-    width: 1391px;
-    height: 540px;
+  .gb-nav__menu--secondary {
+    border-top: 1px solid #e5e5e5;
+    padding: 12px 16px 0;
+    margin: 0 0 4px;
+    background: #ff6701;
+  }
+
+  .gb-nav__link {
+    font-size: 15px;
+    width: 100%;
+  }
+
+  .gb-mega {
+    position: static;
+    display: none;
+    box-shadow: none;
+    top: auto;
+    width: 100%;
+  }
+
+  .gb-mega__inner {
+    padding: 18px 14px 10px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    background: #ffffff;
+    border: 1px solid #f1f1f1;
+    width: 100%;
+    min-width: 0;
     max-width: none;
+    max-height: none;
+    margin: 0;
+    border-radius: 10px;
+  }
+
+  .gb-mega__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 12px;
+  }
+
+  .gb-mega__item {
+    padding: 8px 6px;
+    background: #ffffff;
+  }
+
+  .gb-nav__item--has-mega.is-open .gb-mega {
+    display: block;
+    pointer-events: auto;
   }
 }
 
