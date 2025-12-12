@@ -28,11 +28,36 @@
             <div>
               <h3 style="margin:0 0 6px;">{{ product.title }}</h3>
               <div class="home-product-card__price">
+                {% liquid
+                  assign price_str = product.price | money
+                  assign price_parts = price_str | split: ','
+                  assign price_whole = price_parts[0]
+                  assign price_cents = price_parts[1]
+                  assign compare_str = product.compare_at_price_max | money
+                  assign compare_parts = compare_str | split: ','
+                  assign compare_whole = compare_parts[0]
+                  assign compare_cents = compare_parts[1]
+                %}
                 {% if product.compare_at_price_max > product.price %}
-                  <span>{{ product.price | money }}</span>
-                  <span style="color: var(--gb-muted); text-decoration: line-through; font-weight: 500;">{{ product.compare_at_price_max | money }}</span>
+                  <span class="home-price">
+                    <span class="home-price__whole">{{ price_whole }}</span>
+                    {% if price_cents %}
+                      <sup class="home-price__cents">,{{ price_cents }}</sup>
+                    {% endif %}
+                  </span>
+                  <span class="home-price home-price--compare">
+                    <span class="home-price__whole">{{ compare_whole }}</span>
+                    {% if compare_cents %}
+                      <sup class="home-price__cents">,{{ compare_cents }}</sup>
+                    {% endif %}
+                  </span>
                 {% else %}
-                  <span>{{ product.price | money }}</span>
+                  <span class="home-price">
+                    <span class="home-price__whole">{{ price_whole }}</span>
+                    {% if price_cents %}
+                      <sup class="home-price__cents">,{{ price_cents }}</sup>
+                    {% endif %}
+                  </span>
                 {% endif %}
               </div>
             </div>
@@ -45,28 +70,69 @@
             {% if i == 1 %}
               <img src="{{ '69ed603c5bde711f43c0a4ce82be83dd7273.jpg' | asset_url }}" alt="Martelo Combinado KH 5 G AEG" loading="lazy" style="width:100%;height:180px;object-fit:contain;background:#fff;">
               <h3 style="margin:12px 0 6px;">Martelo Combinado KH 5 G AEG</h3>
-              <div class="home-product-card__price">{{ 50000 | money }}</div>
+              {% liquid
+                assign price_str = 50000 | money
+                assign price_parts = price_str | split: ','
+                assign price_whole = price_parts[0]
+                assign price_cents = price_parts[1]
+              %}
+              <div class="home-product-card__price">
+                <span class="home-price">
+                  <span class="home-price__whole">{{ price_whole }}</span>
+                  {% if price_cents %}
+                    <sup class="home-price__cents">,{{ price_cents }}</sup>
+                  {% endif %}
+                </span>
+              </div>
               <a class="gb-btn" href="#">{{ section.settings.product_button_label }}</a>
             {% elsif i == 2 %}
               <img src="{{ '9f6783217678b36f2d3b35d230f2231a1af80233.jpg' | asset_url }}" alt="1,90 M Carril Sup. IN.15. 953 Fixação ao Teto Inox" loading="lazy" style="width:100%;height:180px;object-fit:contain;background:#fff;transform:scale(1.5);">
               <h3 style="margin:12px 0 6px;">1,90 M Carril Sup. IN.15. 953 Fixação ao Teto Inox</h3>
-              <div class="home-product-card__price">{{ 50000 | money }}</div>
+              <div class="home-product-card__price">
+                <span class="home-price">
+                  <span class="home-price__whole">{{ price_whole }}</span>
+                  {% if price_cents %}
+                    <sup class="home-price__cents">,{{ price_cents }}</sup>
+                  {% endif %}
+                </span>
+              </div>
               <a class="gb-btn" href="#">{{ section.settings.product_button_label }}</a>
             {% elsif i == 3 %}
               <img src="{{ '4047cab007956911e8f128b68b16d98192f426b6.jpg' | asset_url }}" alt="1 kg Aquaprotect Professional SILIC. MS LIQ. BRANCO" loading="lazy" style="width:100%;height:180px;object-fit:contain;background:#fff;">
               <h3 style="margin:12px 0 6px;">1 kg Aquaprotect Professional SILIC. MS LIQ. BRANCO</h3>
-              <div class="home-product-card__price">{{ 50000 | money }}</div>
+              <div class="home-product-card__price">
+                <span class="home-price">
+                  <span class="home-price__whole">{{ price_whole }}</span>
+                  {% if price_cents %}
+                    <sup class="home-price__cents">,{{ price_cents }}</sup>
+                  {% endif %}
+                </span>
+              </div>
               <a class="gb-btn" href="#">{{ section.settings.product_button_label }}</a>
             {% elsif i == 4 %}
               <img src="{{ '72a29bf35d451169efa6c142aaf839e945750a57.jpg' | asset_url }}" alt="Corta relva a gas. c/tração 46cm Sioux 855 ZSG-V23 Garland" loading="lazy" style="width:100%;height:180px;object-fit:contain;background:#fff;">
               <h3 style="margin:12px 0 6px;">Corta relva a gas. c/tração 46cm Sioux 855 ZSG-V23 Garland</h3>
-              <div class="home-product-card__price">{{ 50000 | money }}</div>
+              <div class="home-product-card__price">
+                <span class="home-price">
+                  <span class="home-price__whole">{{ price_whole }}</span>
+                  {% if price_cents %}
+                    <sup class="home-price__cents">,{{ price_cents }}</sup>
+                  {% endif %}
+                </span>
+              </div>
               <a class="gb-btn" href="#">{{ section.settings.product_button_label }}</a>
             {% else %}
               {% assign placeholder = 'placeholder.png' | asset_url %}
               <img src="{{ placeholder }}" alt="Produto exemplo {{ i }}" loading="lazy" style="width:100%;height:180px;object-fit:contain;background:#fff;">
               <h3 style="margin:12px 0 6px;">Produto exemplo {{ i }}</h3>
-              <div class="home-product-card__price">{{ 50000 | money }}</div>
+              <div class="home-product-card__price">
+                <span class="home-price">
+                  <span class="home-price__whole">{{ price_whole }}</span>
+                  {% if price_cents %}
+                    <sup class="home-price__cents">,{{ price_cents }}</sup>
+                  {% endif %}
+                </span>
+              </div>
               <a class="gb-btn" href="#">{{ section.settings.product_button_label }}</a>
             {% endif %}
           </div>

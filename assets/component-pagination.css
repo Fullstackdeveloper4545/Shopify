@@ -1,82 +1,59 @@
 .pagination-wrapper {
-  margin-top: 4rem;
-}
-
-@media screen and (min-width: 990px) {
-  .pagination-wrapper {
-    margin-top: 5rem;
-  }
+  margin-top: 2rem;
 }
 
 .pagination__list {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
+  gap: 0.25rem;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.015em;
 }
 
 .pagination__list > li {
-  flex: 1 0 4.4rem;
-  max-width: 4.4rem;
-}
-
-.pagination__list > li:not(:last-child) {
-  margin-right: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
 }
 
 .pagination__item {
-  color: rgb(var(--color-foreground));
   display: inline-flex;
-  justify-content: center;
   align-items: center;
-  position: relative;
-  height: 4.4rem;
-  width: 100%;
+  justify-content: center;
   padding: 0;
+  margin: 0;
+  height: auto;
+  width: auto;
+  color: #111;
   text-decoration: none;
 }
 
-a.pagination__item:hover::after {
-  height: 0.1rem;
+.pagination__item--current {
+  color: #f76b1c;
 }
 
-.pagination__item .icon-caret {
-  height: 0.6rem;
+.pagination__item-arrow {
+  padding: 0.35rem;
 }
 
-.pagination__item--current::after {
-  height: 0.1rem;
-}
-
-.pagination__item--current::after,
-.pagination__item:hover::after {
-  content: '';
-  display: block;
-  width: 2rem;
-  position: absolute;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: currentColor;
-}
-
-.pagination__item--next .icon {
-  margin-left: -0.2rem;
-  transform: rotate(90deg);
-}
-
-.pagination__item--next:hover .icon {
-  transform: rotate(90deg) scale(1.07);
+.pagination__item-arrow .icon {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
 }
 
 .pagination__item--prev .icon {
-  margin-right: -0.2rem;
   transform: rotate(-90deg);
 }
 
-.pagination__item--prev:hover .icon {
-  transform: rotate(-90deg) scale(1.07);
+.pagination__item--next .icon {
+  transform: rotate(90deg);
 }
 
-.pagination__item-arrow:hover::after {
-  display: none;
+.pagination__separator {
+  font-size: 18px;
+  color: #111;
+  line-height: 1;
 }
