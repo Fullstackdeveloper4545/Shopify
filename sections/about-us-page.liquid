@@ -59,15 +59,9 @@
 }
 .about-us__grid--mission {
   align-items: center;
-  text-align: center;
+  text-align: left;
 }
 .about-us__grid--services { align-items: flex-start; }
-.about-us__grid--mission .about-us__title,
-.about-us__grid--mission .about-us__text {
-  justify-self: center;
-}
-.about-us__grid--mission .about-us__title { text-align: center; }
-.about-us__grid--mission .about-us__text { text-align: center; }
 .about-us__title {
   font-family: 'Poppins', sans-serif;
   font-size: 42px;
@@ -96,6 +90,32 @@
 .about-us__image img {
   width: 100%;
   border-radius: 12px;
+  object-fit: cover;
+  display: block;
+}
+.about-us__image--mission {
+  position: relative;
+}
+.mission-carousel {
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background: transparent;
+}
+.mission-carousel__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 400ms ease;
+}
+.mission-carousel__slide.is-active {
+  opacity: 1;
+  position: relative;
+}
+.mission-carousel__slide img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   display: block;
 }
@@ -204,6 +224,8 @@
 }
 {%- endstyle -%}
 
+{%- assign fallback_mission_image = '093c3cb500d0a4fb65114bfc5ec76f2133fc8146.jpg' | asset_url -%}
+
 <section class="about-us" data-section-id="{{ section.id }}">
   <div class="about-us__hero">
     {% if section.settings.hero_image != blank %}
@@ -227,19 +249,63 @@
   </div>
 
   <div class="about-us__grid about-us__grid--mission">
-    <div class="about-us__image">
-      {% assign fallback_mission_image = '093c3cb500d0a4fb65114bfc5ec76f2133fc8146.jpg' | asset_url %}
-      {% if section.settings.mission_image != blank %}
-        {{ section.settings.mission_image | image_url: width: 1200 | image_tag: alt: section.settings.mission_heading, loading: 'lazy' }}
-      {% else %}
-        <img src="{{ fallback_mission_image }}" alt="{{ section.settings.mission_heading | escape }}" loading="lazy" style="width:100%;max-width:602px;height:auto;object-fit:cover;border-radius:10px;">
-      {% endif %}
+    <div class="about-us__image about-us__image--mission">
+      <div class="mission-carousel" data-mission-carousel-{{ section.id }}>
+        {%- assign mission_slides = section.blocks | where: 'type', 'mission_slide' -%}
+        {%- if mission_slides.size > 0 -%}
+          {%- assign rendered_first = false -%}
+          {%- for block in mission_slides -%}
+            {%- assign mission_img = block.settings.image -%}
+            {%- if mission_img != blank -%}
+              {%- assign slide_alt = block.settings.alt_text | default: section.settings.mission_heading -%}
+              <div class="mission-carousel__slide{% if rendered_first == false %} is-active{% endif %}">
+                {{ mission_img | image_url: width: 1200 | image_tag: alt: slide_alt, loading: 'lazy' }}
+              </div>
+              {%- assign rendered_first = true -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- unless rendered_first -%}
+            <div class="mission-carousel__slide is-active">
+              <img src="{{ fallback_mission_image }}" alt="{{ section.settings.mission_heading | escape }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+            </div>
+          {%- endunless -%}
+        {%- elsif section.settings.mission_image != blank -%}
+          <div class="mission-carousel__slide is-active">
+            {{ section.settings.mission_image | image_url: width: 1200 | image_tag: alt: section.settings.mission_heading, loading: 'lazy' }}
+          </div>
+        {%- else -%}
+          <div class="mission-carousel__slide is-active">
+            <img src="{{ fallback_mission_image }}" alt="{{ section.settings.mission_heading | escape }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+        {%- endif -%}
+      </div>
     </div>
     <div>
-      <h2 class="about-us__title"style="font-size:42px;font-weight:500;line-height:100%;text-align: left;letter-spacing:0;">{{ section.settings.mission_heading }}</h2>
-      <div class="about-us__text" style="font-size:18px;font-weight:400;line-height:1.7;letter-spacing:0;">{{ section.settings.mission_text | newline_to_br }}</div>
+      <h2 class="about-us__title" style="font-size:42px;font-weight:500;line-height:100%;letter-spacing:0;">
+        {{ section.settings.mission_heading }}
+      </h2>
+      <div class="about-us__text" style="font-size:18px;font-weight:400;line-height:1.7;letter-spacing:0;text-align:left;">
+        {{ section.settings.mission_text | newline_to_br }}
+      </div>
     </div>
   </div>
+  <script>
+    (function () {
+      const carousel = document.querySelector('[data-mission-carousel-{{ section.id }}]');
+      if (!carousel) return;
+      const slides = carousel.querySelectorAll('.mission-carousel__slide');
+      if (slides.length <= 1) return;
+
+      let currentIndex = 0;
+      const rotateSlides = () => {
+        slides[currentIndex].classList.remove('is-active');
+        currentIndex = (currentIndex + 1) % slides.length;
+        slides[currentIndex].classList.add('is-active');
+      };
+
+      setInterval(rotateSlides, 5000);
+    })();
+  </script>
 
   <div class="about-us__card" style="text-align:left; display:flex; flex-direction:column; justify-content:center; padding:40px 24px;">
     <h3 style="margin-top:0;margin-bottom:12px;font-family:'Poppins',sans-serif;font-weight:500;font-size:42px;line-height:48px;letter-spacing:0;color:#fff;text-align:left;margin-left:0;">
@@ -457,6 +523,17 @@
     { "type": "text", "id": "founders_heading", "label": "Título fundadores", "default": "Mensagem \n dos Fundadores" },
     { "type": "textarea", "id": "founders_text", "label": "Texto fundadores", "default": "Começámos como uma pequena equipa apaixonada\npor inovação e conforto térmico. Hoje, somos uma\nreferência nacional em sistemas de climatização e\n energias renováveis. O nosso segredo? Ouvir cada\n  cliente, compreender cadaespaço e tratar cada projeto\ncomo único." }
   ],
+  "blocks": [
+    {
+      "type": "mission_slide",
+      "name": "Imagem da missão",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Imagem" },
+        { "type": "text", "id": "alt_text", "label": "Texto alternativo", "default": "Mission slide image" }
+      ]
+    }
+  ],
+  "max_blocks": 5,
   "presets": [
     { "name": "Sobre nós" }
   ]

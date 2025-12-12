@@ -105,19 +105,28 @@
       padding: 8px;
     }
 
-    .product-breadcrumb {
+    .product-breadcrumbs {
       font-size: 14px;
-      color: #888;
-      margin-bottom: 6px;
-      letter-spacing: 0.01em;
+      color: #4a4a4a;
+      margin-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 4px;
+      letter-spacing: 0.02em;
     }
-    .product-breadcrumb a {
-      color: #888;
+    .product-breadcrumbs a {
+      color: inherit;
       text-decoration: none;
+      font-weight: 500;
     }
-    .product-breadcrumb a:last-child {
-      color: #e67d1a;
+    .product-breadcrumbs__separator {
+      color: #b0b0b0;
+      margin: 0 6px;
+    }
+    .product-breadcrumbs__current {
       font-weight: 600;
+      color: #181818;
     }
 
     .product__info-container .product__text,
@@ -293,7 +302,17 @@
   {%- endif -%}
 
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
+  {% assign first_collection = product.collections | first %}
   <div class="page-width">
+    <nav class="product-breadcrumbs" aria-label="{{ 'general.breadcrumbs' | t | default: 'Breadcrumb' }}">
+      <a href="/" class="product-breadcrumbs__home">{{ 'general.home' | t | default: 'Loja' }}</a>
+      {% if first_collection %}
+        <span class="product-breadcrumbs__separator" aria-hidden="true">/</span>
+        <a href="{{ first_collection.url }}">{{ first_collection.title | escape }}</a>
+      {% endif %}
+      <span class="product-breadcrumbs__separator" aria-hidden="true">/</span>
+      <span class="product-breadcrumbs__current" aria-current="page">{{ product.title | escape }}</span>
+    </nav>
     <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
       <div class="grid__item product__media-wrapper">
         {% render 'product-media-gallery', variant_images: variant_images %}
@@ -304,17 +323,6 @@
           class="product__info-container{% if section.settings.enable_sticky_info %} product__column-sticky{% endif %}"
         >
           {%- assign product_form_id = 'product-form-' | append: section.id -%}
-
-          <div class="product-breadcrumb" style="font-size:14px;color:#888;margin-bottom:6px;">
-            <a href="/" style="color:#888;text-decoration:none;">Loja</a>
-            {%- assign first_collection = product.collections | first -%}
-            {%- if first_collection -%}
-              <span aria-hidden="true"> / </span>
-              <a href="{{ first_collection.url }}" style="color:#888;text-decoration:none;">
-                {{ first_collection.title | escape }}
-              </a>
-            {%- endif -%}
-          </div>
 
           {%- for block in section.blocks -%}
             {%- case block.type -%}
