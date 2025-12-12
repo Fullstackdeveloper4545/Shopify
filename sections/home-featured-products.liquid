@@ -3,8 +3,10 @@
     {% unless section.settings.hide_header %}
       <div class="home-products__header">
         <div>
-          <h2 class="home-products__title">Produtos</h2>
-          <p class="home-products__text">Na GlobalBrico encontra uma ampla gama de produtos de bricolage, <br /> construção, ferramentas, jardinagem e decoração.</p>
+          <h2 class="home-products__title">{{ section.settings.heading | default: 'Produtos' | replace: '\\n', '\n' | newline_to_br }}</h2>
+          {% assign products_subheading_raw = section.settings.subheading | default: 'Na GlobalBrico encontra uma ampla gama de produtos de bricolage, construção, ferramentas, jardinagem e decoração.' %}
+          {% assign products_subheading_clean = products_subheading_raw | replace: '\\n', '\n' %}
+          <p class="home-products__text">{{ products_subheading_clean | newline_to_br }}</p>
         </div>
         {% if section.settings.button_label != blank %}
           <a class="gb-btn" href="{{ section.settings.button_link }}" style="margin: -53px -1px 51px 10px;">{{ section.settings.button_label }}</a>
@@ -156,7 +158,7 @@
       "type": "textarea",
       "id": "subheading",
       "label": "Subtítulo",
-      "default": "Na GlobalBrico encontra uma ampla gama de produtos de bricolage, construção, ferramentas, jardinagem e decoração."
+      "default": "Descubra os produtos GlobalBrico e torne os seus projetos de bricolage,\nconstrução mais simples, rápidos e económicos."
     },
     {
       "type": "collection",

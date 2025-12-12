@@ -759,7 +759,7 @@ a {
   height: auto;
   margin: 0 0 12px;
   font-size: 36px;
-  line-height: 1;
+  line-height: 1.4;
   font-family: "Poppins", "Montserrat", "Inter", system-ui, -apple-system, sans-serif;
   font-weight: 600;
   letter-spacing: 0;
@@ -771,7 +771,7 @@ a {
   width: auto;
   margin: 0;
   font-size: 20px;
-  line-height: 1;
+  line-height: 1.3;
   font-family: "Poppins", "Montserrat", "Inter", system-ui, -apple-system, sans-serif;
   font-weight: 500;
   letter-spacing: 0;
@@ -782,6 +782,51 @@ a {
   position: static;
   margin-top: 16px;
   justify-content: center;
+}
+
+.home-seasonal-hero {
+  position: relative;
+  background-size: cover;
+  background-position: center -723px;
+  border-radius: 0px;
+  overflow: hidden;
+  min-height: 420px;
+  margin-bottom: var(--gb-space-40);
+}
+
+.home-seasonal-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.home-seasonal-hero__inner {
+  position: relative;
+  max-width: 560px;
+  padding: 80px 0;
+  color: #ffffff;
+}
+
+.home-seasonal-hero__inner h2 {
+  font-size: 42px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0;
+  margin: 0 0 20px;
+  color: #ffffff;
+}
+
+.home-seasonal-hero__inner p {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.35;
+  margin: 0 0 24px;
+}
+
+.home-seasonal-hero__cta {
+  background: #ff6701;
+  color: #ffffff;
+  font-weight: 600;
 }
 
 .sazonais-usps {
@@ -1572,7 +1617,7 @@ a {
 
 /* USPs */
 .home-usps {
-  background: #f8f8f8;
+  background: #ffffff;
   padding: 100px 0;
 }
 

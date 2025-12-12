@@ -108,11 +108,24 @@
         "subheading": "Descubra materiais de qualidade, ferramentas profissionais \ne soluções completas para cada projeto."
       }
     },
+    "home-products-top": {
+      "type": "home-featured-products",
+      "settings": {
+        "heading": "Produtos",
+        "subheading": "Na GlobalBrico encontra uma ampla gama de produtos de bricolage,<br>construção, ferramentas, jardinagem e decoração.",
+        "collection": "",
+        "products_to_show": 4,
+        "product_button_label": "Comprar",
+        "button_label": "Comprar",
+        "button_link": "",
+        "hide_header": false
+      }
+    },
     "home-products-one": {
       "type": "home-featured-products",
       "settings": {
         "heading": "Produtos",
-        "subheading": "Na GlobalBrico encontra uma ampla gama de produtos de bricolage, construção, ferramentas, jardinagem e decoração.",
+        "subheading": "Descubra os produtos GlobalBrico e torne os seus projetos de bricolage,<br>construção mais simples, rápidos e económicos.",
         "collection": "",
         "products_to_show": 8,
         "product_button_label": "Comprar",
@@ -133,9 +146,10 @@
         "hide_header": true
       }
     },
-    "home-banner": {
-      "type": "home-promo-banner",
+    "home-seasonal-hero": {
+      "type": "home-seasonal-hero",
       "settings": {
+        "image_alt": "Preparar para o Outono",
         "heading": "Já está pronto para o Outono?",
         "subheading": "Produtos essenciais para manter a sua casa confortável e o jardim pronto para a estação.",
         "button_label": "Comprar",
@@ -302,9 +316,10 @@
     "home-filters",
     "home-promos",
     "home-categories",
+    "home-products-top",
+    "home-seasonal-hero",
     "home-products-one",
     "home-products-two",
-    "home-banner",
     "home-services",
     "home-usps",
     "home-contact",
