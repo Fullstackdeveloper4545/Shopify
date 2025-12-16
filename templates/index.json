@@ -158,7 +158,7 @@
       "settings": {
         "heading": "",
         "subheading": "",
-        "collection": "",
+        "collection": "produtos",
         "products_to_show": 8,
         "product_button_label": "Comprar",
         "button_label": "",
