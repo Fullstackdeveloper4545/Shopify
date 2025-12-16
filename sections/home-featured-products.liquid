@@ -9,7 +9,7 @@
           <p class="home-products__text">{{ products_subheading_clean | newline_to_br }}</p>
         </div>
         {% if section.settings.button_label != blank %}
-          <a class="gb-btn" href="{{ section.settings.button_link }}" style="margin: -53px -1px 51px 10px;">{{ section.settings.button_label }}</a>
+          <a class="gb-btn home-products__cta" href="{{ section.settings.button_link }}">{{ section.settings.button_label }}</a>
         {% endif %}
       </div>
     {% endunless %}

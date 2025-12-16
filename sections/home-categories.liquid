@@ -15,7 +15,7 @@
             <img src="{{ '0dafb934403bdfaaa54c944b73a6b9cbcf05d72c.jpg' | asset_url }}" alt="{{ cards[0].settings.title | default: 'Jardim' }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
           {% endif %}
           <div class="home-categories__label">
-            <span class="h3" style="margin: 57px;">{{ cards[0].settings.title }}</span>
+            <span class="h3">{{ cards[0].settings.title }}</span>
             {% if cards[0].settings.button_label != blank %}
               <a class="gb-btn home-categories__cta" href="{{ cards[0].settings.link }}">{{ cards[0].settings.button_label }}</a>
             {% endif %}
@@ -32,9 +32,9 @@
               <img src="{{ '3bd3b2d24500f019d77619a857e8a1e5eecc922.png' | asset_url }}" alt="{{ cards[1].settings.title | default: 'Ferramentas' }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
             {% endif %}
             <div class="home-categories__label">
-              <span class="h3" style="margin: 59px 315px 20px 15px;">{{ cards[1].settings.title }}</span>
+              <span class="h3">{{ cards[1].settings.title }}</span>
               {% if cards[1].settings.button_label != blank %}
-                <a class="gb-btn home-categories__cta" href="{{ cards[1].settings.link }}" style="margin: -60px 68px 20px 402px;">{{ cards[1].settings.button_label }}</a>
+                <a class="gb-btn home-categories__cta" href="{{ cards[1].settings.link }}">{{ cards[1].settings.button_label }}</a>
               {% endif %}
             </div>
           </div>
@@ -49,9 +49,9 @@
               <img src="{{ '4b00a339629c99533ca68cedae2d4a41d8f92db.jpg' | asset_url }}" alt="{{ cards[2].settings.title | default: 'Ferragens' }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
             {% endif %}
             <div class="home-categories__label home-categories__label--centered">
-              <span class="h3" style="margin:0;">{{ cards[2].settings.title }}</span>
+              <span class="h3">{{ cards[2].settings.title }}</span>
               {% if cards[2].settings.button_label != blank %}
-                <a class="gb-btn home-categories__cta" href="{{ cards[2].settings.link }}" style="margin: 13px 52px -2px 63px;">{{ cards[2].settings.button_label }}</a>
+                <a class="gb-btn home-categories__cta" href="{{ cards[2].settings.link }}">{{ cards[2].settings.button_label }}</a>
               {% endif %}
             </div>
           </div>
@@ -64,9 +64,9 @@
                 <img src="{{ '0da41b2465d18b5478879fa3f741f3f71e6ce9f.png' | asset_url }}" alt="{{ cards[3].settings.title | default: 'Pintura' }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
               {% endif %}
               <div class="home-categories__label home-categories__label--centered">
-                <span class="h3" style="margin:0;">{{ cards[3].settings.title | default: 'Pintura' }}</span>
+                <span class="h3">{{ cards[3].settings.title | default: 'Pintura' }}</span>
                 {% if cards[3].settings.button_label != blank %}
-                  <a class="gb-btn home-categories__cta" href="{{ cards[3].settings.link }}" style="margin: 13px 15px 0px 78px;">{{ cards[3].settings.button_label }}</a>
+                  <a class="gb-btn home-categories__cta" href="{{ cards[3].settings.link }}">{{ cards[3].settings.button_label }}</a>
                 {% endif %}
               </div>
             </div>
