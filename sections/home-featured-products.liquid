@@ -17,7 +17,7 @@
     <div class="home-products__grid">
       {% assign featured_collection = collections[section.settings.collection] %}
       {% if featured_collection != blank %}
-        {% for product in featured_collection.products limit: section.settings.products_to_show %}
+        {% for product in featured_collection.sazonais limit: section.settings.products_to_show %}
           <div class="home-product-card">
             <a href="{{ product.url }}" aria-label="{{ product.title }}">
               {% assign placeholder = 'placeholder.png' | asset_url %}
