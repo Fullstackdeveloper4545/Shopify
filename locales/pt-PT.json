@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "general": {
     "password_page": {
@@ -537,6 +546,61 @@
       "send_on_label": "Enviar a (opcional)",
       "expanded": "Formulário de destinatário do cartão de oferta expandido",
       "collapsed": "Formulário de destinatário do cartão de oferta fechado"
+    }
+  },
+  "shopify": {
+    "checkout": {
+      "shipping": {
+        "unbranded_description_same_day": "Envio no próprio dia útil",
+        "unbranded_description_with_fulfillment_days": {
+          "one": "Envio no dia útil seguinte.",
+          "other": "Envio em %{count} dias úteis"
+        },
+        "unbranded_description_with_fulfillment_weeks": {
+          "one": "Navios na semana %{count}",
+          "other": "Envio em %{count} semanas"
+        }
+      }
+    }
+  },
+  "customer_accounts": {
+    "order_details": {
+      "payment_confirmation": {
+        "payment_received": "Obrigado! O seu pagamento de {{amount}} foi recebido.",
+        "full_payment_received": "Obrigado! O seu pagamento de {{amount}} foi recebido e este pedido está agora totalmente pago.",
+        "dismiss_label": "Dispensar confirmação de pagamento"
+      }
+    },
+    "account_menu": {
+      "aria_labels": {
+        "close_menu": "Fechar menu",
+        "back_to_main_menu": "Voltar ao menu principal a partir de {{title}}",
+        "open_submenu": "{{title}} , abre o submenu",
+        "loading_menu": "Carregando menu",
+        "account": "Conta",
+        "sign_in_with_email": "Faça login com o seu e-mail",
+        "sign_in": "Entrar"
+      }
+    },
+    "B2B": {
+      "draft_order_details": {
+        "payment_status": {
+          "pending": {
+            "banner_due_today_for_multiple_fulfillments": "Pagamento devido hoje para {{count}} entregas",
+            "banner_overdue_for_multiple_fulfillments": "Pagamento devido por {{count}} cumprimentos"
+          }
+        }
+      }
+    },
+    "errors": {
+      "not_upgraded": "As contas dos clientes não são atualizadas.",
+      "failed_to_revert": "Falha ao reverter as definições da conta do cliente.",
+      "revert_window_expired": "O prazo para reverter a ação expirou."
+    },
+    "payment_methods": {
+      "add_payment_method": {
+        "missing_customer_error": "Algo correu mal. Tente novamente ou contacte o suporte."
+      }
     }
   }
 }
